@@ -19,6 +19,15 @@ function App() {
     classes: [],
   });
 
+  const categories = [
+    "Math",
+    "Reading",
+    "Science",
+    "Social Studies",
+    "Language Arts",
+    "Elective",
+  ];
+
   return (
     <div className="container mt-4">
       <Routes>
@@ -36,7 +45,13 @@ function App() {
         /*Add New Class page */
         <Route
           path="/AddNewClass"
-          element={<AddNewClass data={trackedData} setData={setTrackedData} />}
+          element={
+            <AddNewClass
+              data={trackedData}
+              setData={setTrackedData}
+              categories={categories}
+            />
+          }
         />
       </Routes>
     </div>

@@ -10,7 +10,7 @@ export default function Home() {
       <header className="App-header">
         <h1>Welcome to Homeschool Hours Tracker</h1>
         <h2 className="text-center">
-          <FontAwesomeIcon icon={faSchool} />
+          <FontAwesomeIcon icon={faSchool} size="2x" />
         </h2>
       </header>
 
