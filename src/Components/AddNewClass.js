@@ -1,12 +1,17 @@
 import Nav from "./Nav";
 import { useState } from "react";
 
-export default function AddNewClass({ data, setData }) {
+export default function AddNewClass({ data, setData, categories }) {
   const [className, setClassName] = useState(" ");
   const [category, setCategory] = useState(" ");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    setData((prev) => ({
+      ...prev,
+      classes: [...prev.classes, newClass],
+    }));
   };
 
   if (!className || !category) {
@@ -18,11 +23,6 @@ export default function AddNewClass({ data, setData }) {
     category: category,
   };
 
-  setData((prev) => ({
-    ...prev,
-    classes: [...prev.classes, newClass],
-  }));
-
   return (
     <>
       <div>
@@ -30,7 +30,7 @@ export default function AddNewClass({ data, setData }) {
       </div>
       <form onSubmit={handleSubmit} className="hours-form">
         <h3 className="hours-form-title">Add Your New Class Here</h3>
-        //Set class name
+        {/* Class Name */}
         <input
           className="form-control mb-2"
           type="text"
@@ -38,15 +38,20 @@ export default function AddNewClass({ data, setData }) {
           value={className}
           onChange={(e) => setClassName(e.target.value)}
         />
-        //Category dropdown
+        {/*Create category dropdown*/}
         <select
           className="form-select mb-2"
           value={category}
-          onChange={setCategory}
+          onChange={(e) => setCategory(e.target.value)}
         >
           <option value=" ">Select Category</option>
+          {categories.map((cat, index) => (
+            <option key={index} value={cat}>
+              {cat}
+            </option>
+          ))}
         </select>
-        <input class="btn btn-primary" type="submit" value="Submit"></input>
+        <button className="btn btn-primary">Add Class</button>
       </form>
     </>
   );
