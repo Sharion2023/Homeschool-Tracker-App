@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import AddHours from "./AddHours";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Nav from "./Nav";
 
 export default function CurrentHours() {
   const [current, setCurrentHours] = useState(0);
   return (
     <>
       <div>
-        <Link to="/" className="btn btn-secondary mb-3">
-          Home
-        </Link>
+        <Nav />
       </div>
       <Container>
         <div className="hours-display">
