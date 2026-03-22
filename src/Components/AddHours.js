@@ -12,7 +12,7 @@ export default function AddHours({
   selectedCourse,
   setSelectedCouse,
 }) {
-  const handleSetCourse = (e) => {
+  const handleSetSelectedCourse = (e) => {
     setSelectedCouse(e.target.value);
   };
 
@@ -51,7 +51,7 @@ export default function AddHours({
           <select
             className="form-select"
             value={selectedCourse}
-            onChange={(e) => setSelectedCouse(e.target.value)}
+            onChange={handleSetSelectedCourse}
           >
             <option value=" ">Select course</option>
             {courses.length === 0 ? (
