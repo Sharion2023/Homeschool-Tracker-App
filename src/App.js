@@ -14,9 +14,9 @@ function App() {
   const [trackedData, setTrackedData] = useState({
     addHours: 0,
     coreHours: 0,
-    location: " ",
+    location: "",
     regLocationHours: 0,
-    classes: [],
+    courses: [],
   });
 
   const categories = [
@@ -28,21 +28,37 @@ function App() {
     "Elective",
   ];
 
+  const [selectedCourse, setSelectedCouse] = useState("");
+
   return (
     <div className="container mt-4">
       <Routes>
         <Route path="/" element={<Home />} />
-        //Add hours page
+        {/*Add hours page*/}
         <Route
           path="/AddHours"
-          element={<AddHours data={trackedData} setData={setTrackedData} />}
+          element={
+            <AddHours
+              addHours={trackedData.addHours}
+              setAddHours={(value) =>
+                setTrackedData((prev) => ({ ...prev, addHours: value }))
+              }
+              location={trackedData.location}
+              setLocation={(value) =>
+                setTrackedData((prev) => ({ ...prev, location: value }))
+              }
+              courses={trackedData.courses}
+              selectedCourse={selectedCourse}
+              setSelectedCouse={setSelectedCouse}
+            />
+          }
         />
-        /*Current Hours page */
+        {/*Current Hours page */}
         <Route
           path="/CurrentHours"
           element={<CurrentHours data={trackedData} />}
         />
-        /*Add New Class page */
+        {/*Add New Class page */}
         <Route
           path="/AddNewClass"
           element={

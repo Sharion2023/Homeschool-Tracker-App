@@ -2,25 +2,40 @@ import Nav from "./Nav";
 import { useState } from "react";
 
 export default function AddNewClass({ data, setData, categories }) {
-  const [className, setClassName] = useState(" ");
-  const [category, setCategory] = useState(" ");
+  const [courseName, setCourseName] = useState("");
+  const [category, setCategory] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!courseName || !category) {
+      alert("All fields are required!");
+      return;
+    }
+
+    {
+      /*Create new class with category*/
+    }
+    const newCourse = {
+      name: courseName,
+      category: category,
+    };
+
+    {
+      /*Set new class info*/
+    }
     setData((prev) => ({
       ...prev,
-      classes: [...prev.classes, newClass],
+      courses: [...prev.courses, newCourse],
     }));
-  };
 
-  if (!className || !category) {
-    alert("All fields are required!");
-  }
+    {
+      /*Reset form*/
+    }
+    setCourseName("");
+    setCategory("");
 
-  const newClass = {
-    name: className,
-    category: category,
+    console.log(data);
   };
 
   return (
@@ -29,14 +44,14 @@ export default function AddNewClass({ data, setData, categories }) {
         <Nav />
       </div>
       <form onSubmit={handleSubmit} className="hours-form">
-        <h3 className="hours-form-title">Add Your New Class Here</h3>
+        <h3 className="hours-form-title">Add Your New Course Here</h3>
         {/* Class Name */}
         <input
           className="form-control mb-2"
           type="text"
           placeholder="Enter class name"
-          value={className}
-          onChange={(e) => setClassName(e.target.value)}
+          value={courseName}
+          onChange={(e) => setCourseName(e.target.value)}
         />
         {/*Create category dropdown*/}
         <select
@@ -51,7 +66,9 @@ export default function AddNewClass({ data, setData, categories }) {
             </option>
           ))}
         </select>
-        <button className="btn btn-primary">Add Class</button>
+        <button type="submit" className="btn btn-primary">
+          Add Course
+        </button>
       </form>
     </>
   );

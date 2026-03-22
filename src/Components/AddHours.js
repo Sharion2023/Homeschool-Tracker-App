@@ -3,11 +3,19 @@ import Button from "react-bootstrap/Button";
 import Nav from "./Nav";
 
 export default function AddHours({
+  data,
   addHours,
   setAddHours,
   location,
   setLocation,
+  courses,
+  selectedCourse,
+  setSelectedCouse,
 }) {
+  const handleSetCourse = (e) => {
+    setSelectedCouse(e.target.value);
+  };
+
   const handleLocationChange = (event) => {
     setLocation(event.target.value);
     console.log(location);
@@ -29,6 +37,7 @@ export default function AddHours({
 
     // Reset the text field after submission (optional)
     //setLocation('');
+    console.log(data);
   };
 
   return (
@@ -41,12 +50,19 @@ export default function AddHours({
           <label className="form-label">Class</label>
           <select
             className="form-select"
-            value={location}
-            onChange={handleLocationChange}
+            value={selectedCourse}
+            onChange={(e) => setSelectedCouse(e.target.value)}
           >
-            <option value="">Select class</option>
-            <option value="Home">Home Location</option>
-            <option value="Other">Other</option>
+            <option value=" ">Select course</option>
+            {courses.length === 0 ? (
+              <option disabled>No Courses Available</option>
+            ) : (
+              courses.map((course, index) => (
+                <option key={index} value={course.name}>
+                  {course.name}
+                </option>
+              ))
+            )}
           </select>
         </div>
 
