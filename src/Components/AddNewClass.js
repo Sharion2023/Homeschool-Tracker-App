@@ -1,7 +1,13 @@
 import Nav from "./Nav";
 import { useState } from "react";
 
-export default function AddNewClass({ data, setData, categories }) {
+export default function AddNewClass({
+  data,
+  setData,
+  categories,
+  isCore,
+  setIsCore,
+}) {
   const [courseName, setCourseName] = useState("");
   const [category, setCategory] = useState("");
 
@@ -13,12 +19,17 @@ export default function AddNewClass({ data, setData, categories }) {
       return;
     }
 
+    if (category !== "Elective") {
+      setIsCore(true);
+    }
+
     {
       /*Create new class with category*/
     }
     const newCourse = {
       name: courseName,
       category: category,
+      classification: isCore ? "core" : "elective",
     };
 
     {

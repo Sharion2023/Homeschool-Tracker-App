@@ -11,6 +11,8 @@ export default function AddHours({
   courses,
   selectedCourse,
   setSelectedCouse,
+  coreHours,
+  setCoreHours,
 }) {
   const handleSetSelectedCourse = (e) => {
     setSelectedCouse(e.target.value);
@@ -22,7 +24,9 @@ export default function AddHours({
   };
 
   const handleHoursChange = (event) => {
-    setAddHours(event.target.value);
+    const hours = Number(event.target.value);
+    setAddHours(hours);
+
     console.log("Adding hours:" + addHours);
   };
 
@@ -34,11 +38,16 @@ export default function AddHours({
     console.log("hours changed");
     console.log("Submitted hours:", addHours);
     //add hours at location to database
+    if (selectedCourse.classification === "Core") {
+      setCoreHours((prev) => prev + addHours);
+      setAddHours((prev) => prev + addHours);
+    }
 
     // Reset the text field after submission (optional)
     //setLocation('');
-    console.log(data);
   };
+
+  const hoursOptions = [0.5, 1, 1.5, 2, 2.5, 3, 3.5];
 
   return (
     <>
@@ -74,12 +83,11 @@ export default function AddHours({
             onChange={handleHoursChange}
           >
             <option value="">Select hours</option>
-            <option value="1">1</option>
-            <option value="1.5">1.5</option>
-            <option value="2">2</option>
-            <option value="2.5">2.5</option>
-            <option value="3">3</option>
-            <option value="3.5">3.5</option>
+            {hoursOptions.map((hours, index) => (
+              <option key={index} value={hours}>
+                {hours}
+              </option>
+            ))}
           </select>
         </div>
 

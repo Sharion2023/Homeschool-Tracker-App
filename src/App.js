@@ -29,6 +29,7 @@ function App() {
   ];
 
   const [selectedCourse, setSelectedCouse] = useState("");
+  const [isCore, setIsCore] = useState(true);
 
   return (
     <div className="container mt-4">
@@ -50,6 +51,10 @@ function App() {
               courses={trackedData.courses}
               selectedCourse={selectedCourse}
               setSelectedCouse={setSelectedCouse}
+              coreHours={trackedData.coreHours}
+              setCoreHours={(value) =>
+                setTrackedData((prev) => ({ ...prev, coreHours: value }))
+              }
             />
           }
         />
@@ -66,6 +71,8 @@ function App() {
               data={trackedData}
               setData={setTrackedData}
               categories={categories}
+              isCore={isCore}
+              setIsCore={setIsCore}
             />
           }
         />
